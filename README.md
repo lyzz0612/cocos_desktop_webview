@@ -116,3 +116,8 @@ cocos UIWebView在windows和mac平台上的适配
 1. Mac打不开`https`网址：`Info.plist`中添加`NSAppTransportSecurity`配置，参考[苹果文档翻译 iOS10 NSAppTransportSecurity](https://www.jianshu.com/p/1ec3fa1ec00f)
 2. TODO
   * `setJavascriptInterfaceScheme`接口支持
+
+## 效果图
+![](https://github.com/lyzz0612/cocos_desktop_webview/raw/master/preview/mac.png)
+
+![](https://github.com/lyzz0612/cocos_desktop_webview/raw/master/preview/windows.png)
