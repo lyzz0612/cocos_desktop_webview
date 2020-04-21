@@ -114,7 +114,8 @@ cocos UIWebView在windows和mac平台上的适配
 ## 常见问题
 
 1. Mac打不开`https`网址：`Info.plist`中添加`NSAppTransportSecurity`配置，参考[苹果文档翻译 iOS10 NSAppTransportSecurity](https://www.jianshu.com/p/1ec3fa1ec00f)
-2. TODO
+2. windows默认使用的是IE7内核，不少js特性不支持，可以在注册表`[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION]`中新加dword值，键为你的应用程序名字，如`xxxx.exe`,值为对应ie版本，`2af9`是IE11
+3. TODO
   * `setJavascriptInterfaceScheme`接口支持
 
 ## 效果图
