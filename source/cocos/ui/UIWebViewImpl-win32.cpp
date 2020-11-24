@@ -36,6 +36,8 @@
 #include "base/CCDirector.h"
 #include "platform/CCFileUtils.h"
 #include "platform/CCGLView.h"
+#include <windows.h>
+#include <direct.h>
 
 // declarate
 class Win32WebControl : public DWebBrowserEvents2
@@ -437,7 +439,23 @@ bool Win32WebControl::createWebView(
 
         hr = _webBrowser2->get_Document(&_htmlDoc);
         CC_BREAK_IF(FAILED(hr));
-
+	//写入注册表
+	HKEY hk;
+	LPCTSTR str = TEXT("Software\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION");
+	if (RegOpenKeyEx(HKEY_CURRENT_USER, str, 0, KEY_ALL_ACCESS, &hk) != 0) {
+		CCLOG("!! Can not open regedit !!");
+	} else {
+		//获取执行路径
+		char exePath[512] = {0};
+    		GetModuleFileName(NULL, exePath, sizeof(exePath)-1);
+		
+		DWORD dwValue = 11001;
+		if (RegSetValueEx(hk, TEXT(exePath), NULL, REG_DWORD, (const BYTE*)&dwValue, sizeof(dwValue)) != 0) {
+			CCLOG("!! regedit wirte fail. %s !!", str);
+		}
+		RegCloseKey(hk);
+	}
+	
         ret = true;
     } while (0);
 
